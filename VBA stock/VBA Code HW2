@@ -111,7 +111,7 @@ Dim Trickerlastrow As Long
         Range("Q2").Value = Cells(k, Column + 10).Value
         Range("Q2").NumberFormat = "0.00%"
         
-        ElseIf Cells(k, Column + 10).Value = Application.WorksheetFunction.Min(ws.Range("K2:K")) Then
+        ElseIf Cells(k, Column + 10).Value = Application.WorksheetFunction.Min(ws.Range("K:K")) Then
         Range("P3").Value = Cells(k, Column + 8).Value
         Range("Q3").Value = Cells(k, Column + 10).Value
         Range("Q3").NumberFormat = "0.00%"
