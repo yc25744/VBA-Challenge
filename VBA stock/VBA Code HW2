@@ -106,17 +106,17 @@ Dim Trickerlastrow As Long
         
         For k = 2 To Trickerlastrow
         
-        If Cells(k, Column + 10).Value = Application.WorksheetFunction.Max(ws.Range("K2:K" & Trickerlastrow)) Then
+        If Cells(k, Column + 10).Value = Application.WorksheetFunction.Max(ws.Range("K:K")) Then
         Range("P2").Value = Cells(k, Column + 8).Value
         Range("Q2").Value = Cells(k, Column + 10).Value
         Range("Q2").NumberFormat = "0.00%"
         
-        ElseIf Cells(k, Column + 10).Value = Application.WorksheetFunction.Min(ws.Range("K2:K" & Trickerlastrow)) Then
+        ElseIf Cells(k, Column + 10).Value = Application.WorksheetFunction.Min(ws.Range("K2:K")) Then
         Range("P3").Value = Cells(k, Column + 8).Value
         Range("Q3").Value = Cells(k, Column + 10).Value
         Range("Q3").NumberFormat = "0.00%"
         
-        ElseIf Cells(k, Column + 11).Value = Application.WorksheetFunction.Min(ws.Range("L2:L" & Trickerlastrow)) Then
+        ElseIf Cells(k, Column + 11).Value = Application.WorksheetFunction.Min(ws.Range("L:L")) Then
         Range("P4").Value = Cells(k, Column + 8).Value
         Range("Q4").Value = Cells(k, Column + 11).Value
       
