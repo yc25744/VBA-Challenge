@@ -1,0 +1,134 @@
+Sub Testing()
+
+Dim ws As Worksheet
+
+Dim Trickerlastrow As Long
+
+    For Each ws In ActiveWorkbook.Worksheets
+    ws.Activate
+    
+        Trickerlastrow = ws.Range("A:A").SpecialCells(xlCellTypeLastCell).Row
+
+        Range("I1").Value = "Ticker"
+        Range("J1").Value = "Yearly Change"
+        Range("K1").Value = "Percent Change"
+        Range("L1").Value = "Total Stock Volume"
+
+
+        Dim Ticker_Name As String
+        Dim Open_Price As Double
+        Dim Close_Price As Double
+        Dim Yearly_Change As Double
+        Dim Percent_Change As Double
+        
+        Dim Volume As Double
+        
+        
+        Dim Row As Double
+        Row = 2
+        
+        Dim Column As Integer
+        Column = 1
+        
+        
+        Dim i As Long
+  
+        
+        
+        
+        Open_Price = Cells(2, Column + 2).Value
+        
+        
+        For i = 2 To Trickerlastrow
+        
+        
+            If Cells(i, Column).Value = Cells(i + 1, Column).Value Then
+            
+             Volume = Volume + Cells(i, Column + 6).Value
+                Cells(Row, Column + 11).Value = Volume
+                
+            Else
+            
+                Volume = 0
+               
+            
+                Ticker_Name = Cells(i, Column).Value
+                Cells(Row, Column + 8).Value = Ticker_Name
+                
+                
+                Close_Price = Cells(i, Column + 5).Value
+                
+              
+                Yearly_Change = Close_Price - Open_Price
+                Cells(Row, Column + 9).Value = Yearly_Change
+            
+  
+                
+                If (Open_Price = 0 And Close_Price <> 0) Then
+                    Percent_Change = 1
+                ElseIf (Open_Price = 0 And Close_Price = 0) Then
+                    Percent_Change = 0
+                Else
+                    Percent_Change = Yearly_Change / Open_Price
+                    Cells(Row, Column + 10).Value = Percent_Change
+                    Cells(Row, Column + 10).NumberFormat = "0.00%"
+                End If
+                
+                
+                Row = Row + 1
+             
+                Open_Price = Cells(i + 1, Column + 2)
+                
+                
+            End If
+            
+            
+    
+        Next i
+        
+        For j = 2 To Trickerlastrow
+        
+            If Cells(j, Column + 9).Value >= 0 Then
+            Cells(j, Column + 9).Interior.ColorIndex = 4
+            ElseIf Cells(j, Column + 9).Value < 0 Then
+            Cells(j, Column + 9).Interior.ColorIndex = 3
+            
+            End If
+            
+            Next j
+            
+       
+        Range("P1").Value = "Ticker"
+        Range("Q1").Value = "Value"
+        Range("O2").Value = "Greatest % increase"
+        Range("O3").Value = "Greatest % decrease"
+        Range("O4").Value = "Greatest Total Volume"
+        
+        For k = 2 To Trickerlastrow
+        
+        If Cells(k, Column + 10).Value = Application.WorksheetFunction.Max(ws.Range("K:K" & Trickerlastrow)) Then
+        Range("P2").Value = Cells(k, Column + 8).Value
+        Range("Q2").Value = Cells(k, Column + 10).Value
+        Range("Q2").NumberFormat = "0.00%"
+        
+        ElseIf Cells(k, Column + 10).Value = Application.WorksheetFunction.Min(ws.Range("K:K" & Trickerlastrow)) Then
+        Range("P3").Value = Cells(k, Column + 8).Value
+        Range("Q3").Value = Cells(k, Column + 10).Value
+        Range("Q3").NumberFormat = "0.00%"
+        
+        ElseIf Cells(k, Column + 11).Value = Application.WorksheetFunction.Min(ws.Range("L:L" & Trickerlastrow)) Then
+        Range("P4").Value = Cells(k, Column + 8).Value
+        Range("Q4").Value = Cells(k, Column + 11).Value
+      
+    
+        
+        End If
+        Next k
+    
+
+    
+       Next ws
+        
+
+        
+End Sub
