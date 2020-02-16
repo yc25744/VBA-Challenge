@@ -116,7 +116,7 @@ Dim Trickerlastrow As Long
         Range("Q3").Value = Cells(k, Column + 10).Value
         Range("Q3").NumberFormat = "0.00%"
         
-        ElseIf Cells(k, Column + 11).Value = Application.WorksheetFunction.Min(ws.Range("L:L")) Then
+        ElseIf Cells(k, Column + 11).Value = Application.WorksheetFunction.Max(ws.Range("L:L")) Then
         Range("P4").Value = Cells(k, Column + 8).Value
         Range("Q4").Value = Cells(k, Column + 11).Value
       
